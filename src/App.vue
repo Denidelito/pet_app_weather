@@ -1,30 +1,44 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="app">
+    <header class="app-header">
+      <button class="btn btn--icon">navigation</button>
+      <button class="btn btn--icon">search</button>
+    </header>
+    <main class="app-container">
+      body
+    </main>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+<style scoped lang="scss">
+  .btn {
+    background: #FFFFFF;
+    box-shadow: 0 5px 10px rgba(35, 149, 255, 0.2), inset 0 4px 15px rgba(0, 175, 240, 0.05);
+
+    &--icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  }
+  .app {
+    width: 100%;
+    max-width: 430px;
+    padding: 40px 20px;
+    border-radius: 24px;
+    background-color: white;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-container {
+
+    }
+  }
 </style>
