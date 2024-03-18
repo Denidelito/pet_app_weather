@@ -45,7 +45,6 @@ export default {
     }
   }
   .app {
-    width: 100%;
     max-width: 430px;
     padding: 40px 20px;
     border-radius: 24px;
