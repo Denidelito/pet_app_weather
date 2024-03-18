@@ -36,10 +36,13 @@ export default {
   methods: {
     async fetchWeatherData() {
       try {
+        const position = await this.getCurrentPosition();
+        const { latitude, longitude } = position.coords;
+
         const response = await axios.get('/current.json', {
           params: {
             key: 'e2f2fbc748174eed98c141646241803',
-            q: 'London',
+            q: `${latitude},${longitude}`,
           },
         });
         this.weatherData = response.data;
@@ -47,6 +50,11 @@ export default {
         console.error('Error fetching weather data:', error);
       }
     },
+    getCurrentPosition() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      })
+    }
   },
 }
 </script>
