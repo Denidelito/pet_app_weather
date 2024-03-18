@@ -3,7 +3,7 @@
     <div class="weather__images">
       <img src="../images/condition/cloudy_weather.png" alt="">
     </div>
-    <div class="weather__temperature">24°</div>
+    <div class="weather__temperature">{{temp}}°</div>
     <div class="weather__condition">Облачно</div>
     <div class="weather__date">Вторник, 27.06</div>
   </section>
@@ -11,7 +11,14 @@
 
 <script>
 export default {
-  name: "WeatherForecast"
+  name: "WeatherForecast",
+  props: {
+    temp: {
+      type: Number,
+      required: true,
+      default: 0
+    }
+  }
 }
 </script>
 

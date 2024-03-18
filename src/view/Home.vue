@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <weather-forecast/>
+    <weather-forecast :temp="currentWeatherData ? currentWeatherData.temp_c : null"/>
 
     <weather-info/>
 
@@ -27,7 +27,8 @@ export default {
   },
   data() {
     return {
-      weatherData: null,
+      locationData: null,
+      currentWeatherData: null
     };
   },
   mounted() {
@@ -45,7 +46,12 @@ export default {
             q: `${latitude},${longitude}`,
           },
         });
-        this.weatherData = response.data;
+
+        console.log(response.data.current)
+
+        this.locationData = response.data.location;
+        this.currentWeatherData = response.data.current;
+
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }
