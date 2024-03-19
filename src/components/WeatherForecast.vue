@@ -3,9 +3,9 @@
     <div class="weather__images">
       <img src="../images/condition/cloudy_weather.png" alt="">
     </div>
-    <div class="weather__temperature">{{temp}}°</div>
-    <div class="weather__condition">Облачно</div>
-    <div class="weather__date">Вторник, 27.06</div>
+    <div class="weather__temperature">{{ temp }}°</div>
+    <div class="weather__condition">{{ calculateCloud() }}</div>
+    <div class="weather__date"> {{ getCurrentDay() }}</div>
   </section>
 </template>
 
@@ -17,7 +17,48 @@ export default {
       type: Number,
       required: true,
       default: 0
+    },
+    cloud: {
+      type: Number,
+      required: true,
+      default: 0
     }
+  },
+  methods: {
+    calculateCloud() {
+      let text = 0;
+
+      switch (this.cloud) {
+        case 0:
+          text = 'Ясно'
+
+          break
+        case 100:
+          text = 'Пасмурно'
+          break
+        default :
+          if (this.cloud > 50) {
+            text = 'Облачно'
+          } else {
+            text = 'Переменная облачность'
+          }
+          break
+      }
+
+      return text
+    },
+    getCurrentDay() {
+      const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+
+      const currentDate = new Date();
+      const dayOfWeek = daysOfWeek[currentDate.getDay()];
+      const dayOfMonth = currentDate.getDate();
+      const month = months[currentDate.getMonth()];
+
+      return `${dayOfWeek}, ${dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth} ${month}`;
+    }
+
   }
 }
 </script>

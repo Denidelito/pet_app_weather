@@ -1,6 +1,9 @@
 <template>
   <main class="container">
-    <weather-forecast :temp="currentWeatherData ? currentWeatherData.temp_c : null"/>
+    <weather-forecast
+        :temp="currentWeatherData ? currentWeatherData.temp_c : null"
+        :cloud="currentWeatherData ? currentWeatherData.cloud : null"
+    />
 
     <weather-info/>
 
