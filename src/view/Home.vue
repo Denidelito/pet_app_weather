@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import axios from "../services/api";
+import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
 import weatherForecast from "../components/WeatherForecast.vue";
 import weatherInfo from "../components/WeatherInfo.vue";
 import sunriseSunset from "../components/SunriseSunset.vue";
@@ -25,47 +26,22 @@ export default {
     sunriseSunset,
     weatherByDay
   },
-  data() {
+  setup() {
+    const store = useStore();
+
+    const currentWeatherData = computed(() => store.state.currentWeatherData);
+
+    onMounted(() => {
+      store.dispatch('fetchWeatherData');
+    });
+
     return {
-      locationData: null,
-      currentWeatherData: null
+      currentWeatherData,
     };
   },
-  mounted() {
-    this.fetchWeatherData();
-  },
-  methods: {
-    async fetchWeatherData() {
-      try {
-        const position = await this.getCurrentPosition();
-        const { latitude, longitude } = position.coords;
-
-        const response = await axios.get('/current.json', {
-          params: {
-            key: 'e2f2fbc748174eed98c141646241803',
-            q: `${latitude},${longitude}`,
-          },
-        });
-
-        console.log(response.data.current)
-
-        this.locationData = response.data.location;
-        this.currentWeatherData = response.data.current;
-
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-      }
-    },
-    getCurrentPosition() {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-      })
-    }
-  },
-}
+};
 </script>
 
 <style scoped lang="scss">
-
-
+/* Ваши стили */
 </style>
